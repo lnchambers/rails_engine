@@ -1,8 +1,8 @@
 #How to Create A Rake CSV Importer
 ```
-rails g import_csv create_customers create_invoice_items create_invoices create_items create_merchants create_transactions
+rails g task import_csv create_customers create_invoice_items create_invoices create_items create_merchants create_transactions
 ```
-- In ```lib/taks/import_csv```
+- In ```lib/tasks/import_csv```
 - Create a migration for customers where attributes correspond to column headers in csv ```rails g model customer first_name last_name```
 - Here's how you would structure the import customer csv task the customers csv
 ```ruby
