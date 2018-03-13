@@ -44,8 +44,8 @@ describe "Merchants API" do
 
     get "/api/v1/merchants/find_all?name=Elizabeth-Blackburn"
 
-    merchant = JSON.parse(response.body)
-    expect(merchant.count).to eq(4)
+    merchants = JSON.parse(response.body)
+    expect(merchants.count).to eq(4)
     expect(response).to be_success
     expect(response).to have_http_status(200)
     expect(response.body).to match(merchant.to_json)
