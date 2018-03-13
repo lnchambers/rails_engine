@@ -64,11 +64,6 @@ task import_csv: :environment do
   t2 = Time.now
   puts "Spent #{(t2 - t1).round(2)} seconds importing Customers"
 
-  puts "Importing the Transactions"
-  t1 = Time.now
-  # Rake::Task['import_csv:create_transactions'].invoke
-  t2 = Time.now
-  puts "Spent #{(t2 - t1).round(2)} seconds importing Transactions"
 
   puts "Importing the Items"
   t1 = Time.now
@@ -82,6 +77,12 @@ task import_csv: :environment do
   t2 = Time.now
   puts "Spent #{(t2 - t1).round(2)} seconds importing Invoices"
 
+  puts "Importing the Transactions"
+  t1 = Time.now
+  Rake::Task['import_csv:create_transactions'].invoke
+  t2 = Time.now
+  puts "Spent #{(t2 - t1).round(2)} seconds importing Transactions"
+  
   puts "Importing the Invoice Items"
   t1 = Time.now
   Rake::Task['import_csv:create_invoice_items'].invoke
