@@ -48,7 +48,7 @@ describe "Merchants API" do
     expect(merchants.count).to eq(4)
     expect(response).to be_success
     expect(response).to have_http_status(200)
-    expect(response.body).to match(merchant.to_json)
+    expect(response.body).to match(merchants.to_json)
   end
 
   it "can locate a random merchant" do
