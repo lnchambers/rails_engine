@@ -27,6 +27,8 @@ class Search
     elsif params[:status]
       status = params[:status].gsub("-", " ").downcase
       model.find_by("status LIKE ?", status)
+    elsif params[:quantity]
+      model.find_by("quantity LIKE ?", params[:quantity])
     else
       model.find_by("updated_at LIKE ?", params[:updated_at])
     end
@@ -46,6 +48,8 @@ class Search
     elsif params[:status]
       status = params[:status].gsub("-", " ").downcase
       model.where("status LIKE ?", status)
+    elsif params[:quantity]
+      model.where("quantity LIKE ?", params[:quantity])
     else
       model.where("updated_at LIKE ?", params[:updated_at])
     end
