@@ -24,6 +24,9 @@ class Search
       model.find_by("unit_price LIKE ?", params[:unit_price])
     elsif params[:created_at]
       model.find_by("created_at LIKE ?", params[:created_at])
+    elsif params[:status]
+      status = params[:status].gsub("-", " ").downcase
+      model.find_by("status LIKE ?", status)
     else
       model.find_by("updated_at LIKE ?", params[:updated_at])
     end
@@ -40,6 +43,9 @@ class Search
       model.where("unit_price LIKE ?", params[:unit_price])
     elsif params[:created_at]
       model.where("created_at LIKE ?", params[:created_at])
+    elsif params[:status]
+      status = params[:status].gsub("-", " ").downcase
+      model.where("status LIKE ?", status)
     else
       model.where("updated_at LIKE ?", params[:updated_at])
     end
