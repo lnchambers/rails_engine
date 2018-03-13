@@ -7,8 +7,10 @@ describe "Merchants API" do
     get "/api/v1/merchants"
 
     expect(response).to be_success
+    expect(response).to have_http_status(200)
     merchants = JSON.parse(response.body)
     expect(merchants.count).to eq(3)
+    expect(response.body).to match(merchants.to_json)
   end
 
   it "can get one merchant by its id" do
@@ -19,6 +21,15 @@ describe "Merchants API" do
     merchant = JSON.parse(response.body)
 
     expect(response).to be_success
+    expect(response).to have_http_status(200)
     expect(merchant["id"]).to eq(id)
+    expect(response.body).to match(merchant.to_json)
+  end
+
+  it "can locate a single merchant" do
+    id = create(:merchant).id
+
+
+
   end
 end
