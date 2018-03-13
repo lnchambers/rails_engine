@@ -5,6 +5,8 @@ application up and running.
 
 Things you may want to cover:
 
+* Schema
+![schema](https://i.imgur.com/gzoHyeR.png)
 * Ruby version
 
 * System dependencies

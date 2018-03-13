@@ -1,7 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  before_action :set_search
-  before_action :set_merchant_search
+  before_action :set_search, :set_merchant_search, :set_customer_search
 
   def set_search
     @search = Search.new
