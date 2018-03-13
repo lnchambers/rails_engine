@@ -23,7 +23,7 @@ class Search
       model.find_by("lower(last_name) LIKE ?", params[:last_name])
     elsif params[:description]
       description = params[:description].gsub("-", " ").downcase
-      model.find_by("lower(description) LIKE ?", "%#{description}%")
+      model.find_by("lower(description) LIKE ?", description)
     elsif params[:unit_price]
       model.find_by("unit_price LIKE ?", params[:unit_price])
     elsif params[:created_at]
