@@ -1,5 +1,5 @@
 class Api::V1::MerchantsController < ApplicationController
-  include ApiMethods
+  
   def index
     render json: Merchant.all
   end
