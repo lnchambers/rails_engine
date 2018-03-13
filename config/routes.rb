@@ -4,6 +4,8 @@ Rails.application.routes.draw do
       resources :merchants, only: [:index, :show]
       resources :customers, only: [:index, :show]
       resources :transactions, only: [:index, :show]
+      resources :items, only: [:index, :show]
+      get "items/find", :to => "items#show"
     end
   end
 end
