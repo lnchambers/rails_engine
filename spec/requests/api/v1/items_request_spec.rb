@@ -29,19 +29,17 @@ describe "Items Request" do
     expect(item[1]).to eq(nil)
   end
 
-  it "can search by parameters" do
+  it "can search by parameters and find one" do
     create_list(:item, 5, name: "Richard Dunfordshirelingtonhill", description: "Argwillinillifus Grotcherinkleton", unit_price: 7999)
     create_list(:item, 5)
 
-    get "/api/v1/merchants/find?name=Richard-Dunfordshirelingtonhill"
+    get "/api/v1/items/find?name=Richard-Dunfordshirelingtonhill"
 
-    items = JSON.parse(response.body)
+    item = JSON.parse(response.body)
 
     expect(response).to have_http_status(200)
-    items.each do |item|
-      expect(item["name"]).to eq("Richard Dunfordshirelingtonhill")
-      expect(item["description"]).to eq("Argwillinillifus Grotcherinkleton")
-      expect(item["unit_price"]).to eq(7999)
-    end
+    expect(item["name"]).to eq("Richard Dunfordshirelingtonhill")
+    expect(item["description"]).to eq("Argwillinillifus Grotcherinkleton")
+    expect(item["unit_price"]).to eq(7999)
   end
 end

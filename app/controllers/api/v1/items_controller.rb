@@ -5,8 +5,7 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def show
-    binding.pry
-    render json: Item.where("#{params.keys[0]} LIKE ?", params.values[0])
+    render json: @search.item_single_search(params)
   end
 
 end
