@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :merchant do
-    name "MyString"
+    name "Iron City Toys"
   end
 end
