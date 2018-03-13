@@ -70,4 +70,32 @@ describe "Items Request" do
     expect(item["description"]).to eq("Argwillinillifus Grotcherinkleton")
     expect(item["unit_price"]).to eq(7999)
   end
+
+  it "can search by name and return all" do
+    create_list(:item, 5, name: "Richard Dunfordshirelingtonhill", description: "Argwillinillifus Grotcherinkleton", unit_price: 7999)
+    create_list(:item, 5)
+
+    get "/api/v1/items/find_all?name=Richard-Dunfordshirelingtonhill"
+
+    item = JSON.parse(response.body)
+
+    expect(response).to have_http_status(200)
+    expect(item.count).to eq(5)
+    expect(item[1]["name"]).to eq("Richard Dunfordshirelingtonhill")
+    expect(item[1]["description"]).to eq("Argwillinillifus Grotcherinkleton")
+    expect(item[1]["unit_price"]).to eq(7999)
+  end
+
+  it "can find a random record" do
+    create_list(:item, 5, name: "Richard Dunfordshirelingtonhill", description: "Argwillinillifus Grotcherinkleton", unit_price: 7999)
+    create_list(:item, 5)
+
+    get "/api/v1/items/random"
+
+    item = JSON.parse(response.body)
+
+    expect(response).to be_success
+    expect(item.class).to eq(Hash)
+  end
+
 end

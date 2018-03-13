@@ -5,7 +5,7 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def show
-    render json: @search.item_single_search(params)
+    render json: @item_search.route(params)
   end
 
 end
