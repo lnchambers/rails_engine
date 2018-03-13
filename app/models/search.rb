@@ -42,6 +42,10 @@ class Search
     if params[:name]
       name = params[:name].gsub("-", " ").downcase
       model.where("lower(name) LIKE ?", name)
+    elsif params[:first_name]
+      model.find_by("lower(first_name) LIKE ?", params[:first_name])
+    elsif params[:last_name]
+      model.find_by("lower(last_name) LIKE ?", params[:last_name])
     elsif params[:description]
       description = params[:description].gsub("-", " ").downcase
       model.where("lower(description) LIKE ?", description)

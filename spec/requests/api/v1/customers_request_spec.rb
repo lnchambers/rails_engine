@@ -26,4 +26,42 @@ describe "Customers API" do
     expect(response.body).to match(customer.to_json)
   end
 
+  it "can locate a customer by first name" do
+    create_list(:customer, 10, first_name: "Joey")
+    create_list(:customer, 10)
+
+    get "/api/v1/customers/find?first_name=Joey"
+
+    customers = JSON.parse(response.body)
+
+    expect(response).to be_success
+    expect(response).to have_http_status(200)
+    expect(response.body).to match(customers.to_json)
+  end
+
+  it "can locate a customer by last name" do
+    create_list(:customer, 10, last_name: "Ramone")
+    create_list(:customer, 10)
+
+    get "/api/v1/customers/find?last_name=Ramone"
+
+    customers = JSON.parse(response.body)
+
+    expect(response).to be_success
+    expect(response).to have_http_status(200)
+    expect(response.body).to match(customers.to_json)
+  end
+
+  it "can locate a random customer" do
+    create_list(:customer, 10)
+
+    get "/api/v1/customers/random"
+
+    customer = JSON.parse(response.body)
+
+    expect(response).to be_success
+    expect(response).to have_http_status(200)
+    expect(customer.class).to eq(Hash)
+    expect(response.body).to match(customer.to_json)
+  end
 end
