@@ -56,4 +56,18 @@ describe "Items Request" do
     expect(item["description"]).to eq("Argwillinillifus Grotcherinkleton")
     expect(item["unit_price"]).to eq(7999)
   end
+
+  it "can search by unit_price and return one" do
+    create_list(:item, 5, name: "Richard Dunfordshirelingtonhill", description: "Argwillinillifus Grotcherinkleton", unit_price: 7999)
+    create_list(:item, 5)
+
+    get "/api/v1/items/find?unit_price=7999"
+
+    item = JSON.parse(response.body)
+
+    expect(response).to have_http_status(200)
+    expect(item["name"]).to eq("Richard Dunfordshirelingtonhill")
+    expect(item["description"]).to eq("Argwillinillifus Grotcherinkleton")
+    expect(item["unit_price"]).to eq(7999)
+  end
 end
