@@ -17,6 +17,10 @@ class Search
     if params[:name]
       name = params[:name].gsub("-", " ").downcase
       model.find_by("lower(name) LIKE ?", name)
+    elsif params[:first_name]
+      model.find_by("lower(first_name) LIKE ?", params[:first_name])
+    elsif params[:last_name]
+      model.find_by("lower(last_name) LIKE ?", params[:last_name])
     elsif params[:description]
       description = params[:description].gsub("-", " ").downcase
       model.find_by("lower(description) LIKE ?", description)
@@ -29,6 +33,10 @@ class Search
       model.find_by("status LIKE ?", status)
     elsif params[:quantity]
       model.find_by("quantity LIKE ?", params[:quantity])
+    elsif params[:result]
+      model.find_by("result LIKE ?", params[:result])
+    elsif params[:credit_card_number]
+      model.find_by("credit_card_number LIKE ?", params[:credit_card_number])
     else
       model.find_by("updated_at LIKE ?", params[:updated_at])
     end
@@ -38,6 +46,10 @@ class Search
     if params[:name]
       name = params[:name].gsub("-", " ").downcase
       model.where("lower(name) LIKE ?", name)
+    elsif params[:first_name]
+      model.find_by("lower(first_name) LIKE ?", params[:first_name])
+    elsif params[:last_name]
+      model.find_by("lower(last_name) LIKE ?", params[:last_name])
     elsif params[:description]
       description = params[:description].gsub("-", " ").downcase
       model.where("lower(description) LIKE ?", description)
@@ -50,6 +62,10 @@ class Search
       model.where("status LIKE ?", status)
     elsif params[:quantity]
       model.where("quantity LIKE ?", params[:quantity])
+    elsif params[:result]
+      model.where("result LIKE ?", params[:result])
+    elsif params[:credit_card_number]
+      model.where("credit_card_number LIKE ?", params[:credit_card_number])
     else
       model.where("updated_at LIKE ?", params[:updated_at])
     end
