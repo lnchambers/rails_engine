@@ -5,7 +5,7 @@ class Transaction < ApplicationRecord
   validates_presence_of(:result)
 
   scope :successful, -> { where(result: 'success')}
-  scope :not_succesful, -> { where(result: 'failed')}
+  scope :not_successful, -> { where(result: 'failed')}
 
   default_scope { order(:id) }
 end
