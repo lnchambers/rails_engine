@@ -1,4 +1,5 @@
 class Api::V1::TransactionsController < ApplicationController
+  
   def index
     render json: Transaction.all
   end
@@ -6,4 +7,5 @@ class Api::V1::TransactionsController < ApplicationController
   def show
     render json: @search.route(params, Transaction)
   end
+
 end
