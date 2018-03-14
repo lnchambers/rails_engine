@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe "Transcations API" do
+describe "Transactions API" do
   it "sends a list of transactions" do
     create_list(:transaction, 3)
 

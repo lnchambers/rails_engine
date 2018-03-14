@@ -3,7 +3,8 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :merchants, only: [:index, :show]
       resources :customers, only: [:index, :show] do
-        resources :transactions, only: [:index]
+        get "transactions", :to => "customers/transactions#index"
+        get "invoices", :to => "customers/invoices#index"
       end
       resources :transactions, only: [:index, :show]
       resources :items, only: [:index, :show]

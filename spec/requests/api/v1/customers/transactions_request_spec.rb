@@ -2,12 +2,14 @@ require "rails_helper"
 
 describe "Customer Transaction Request" do
   it "can return all transactions under a specific customer" do
-    invoice = create(:invoice)
+    customer = create(:customer)
+    invoice = create(:invoice, customer: customer)
+    invoice_2 = create(:invoice)
     transaction = create(:transaction, invoice: invoice)
     create_list(:transaction, 4, invoice: invoice)
-    create(:transaction)
+    create(:transaction, invoice: invoice_2)
 
-    get "/api/v1/customers/#{transaction.invoice.customer_id}/transactions"
+    get "/api/v1/customers/#{customer.id}/transactions"
 
     transactions = JSON.parse(response.body)
 
