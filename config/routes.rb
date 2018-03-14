@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
+      namespace :merchants do
+        get "most_revenue", :to => "intelligence#index"
+      end
       resources :merchants, only: [:index, :show] do
         get "invoices", :to => "merchants/invoices#index"
         get "items", :to => "merchants/items#index"
