@@ -6,7 +6,11 @@ class Merchant < ApplicationRecord
   has_many :transactions, through: :invoices
 
   def self.most_revenue(limit = 5)
-    
+    select("merchants.*, sum(invoice_items.unit_price * invoice_items.quantity) AS revenue")
+      .joins(:invoice_items, :transactions)
+      .merge(Transaction.unscoped.successful)
+      .order("revenue DESC").limit(limit)
+      .group(:id)
   end
 
 end
