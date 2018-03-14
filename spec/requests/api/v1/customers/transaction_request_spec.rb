@@ -5,12 +5,11 @@ describe "Customer Transaction Request" do
     invoice = create(:invoice)
     transaction = create(:transaction, invoice: invoice)
     create_list(:transaction, 4, invoice: invoice)
-
+    create(:transaction)
 
     get "/api/v1/customers/#{transaction.invoice.customer_id}/transactions"
 
     transactions = JSON.parse(response.body)
-    binding.pry
 
     expect(response).to be_success
     expect(transactions.count).to eq(5)
