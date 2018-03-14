@@ -12,5 +12,4 @@ class Merchant < ApplicationRecord
       .order("revenue DESC").limit(limit)
       .group(:id)
   end
-
 end
