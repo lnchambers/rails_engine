@@ -13,8 +13,4 @@ class Merchant < ApplicationRecord
       .order("revenue DESC").limit(limit)
       .group(:id)
   end
-
-  def favorite_customer
-    Customer.select("customers.*, count(invoices.merchant_id) AS merchants").join(:invoices, :transactions).merge(Transaction.unscoped.successful).order("merchants DESC").limit(1)
-  end
 end
