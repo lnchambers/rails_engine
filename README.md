@@ -63,11 +63,7 @@ Merchant.first.customers_with_pending_invoices
 
 
 ## Running the tests
-In order to run the test suite, open up the server in one terminal shell
-```
-rails s
-```
-Then in a new terminal shell, run the following command:
+In order to run the test suite, run the following command:
 ```
 rspec
 ```
