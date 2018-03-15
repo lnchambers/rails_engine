@@ -1,14 +1,11 @@
 class MerchantIntelligence
 
   def route(params, request)
-    # binding.pry
     case clean_request(request)
     when "favorite_customer"
       favorite_customer(params)
     when "most_revenue"
       most_revenue(params)
-    when "revenue" && params[:merchant_id] && params[:date]
-      top_revenue_by_date(params)
     when "revenue" && params[:merchant_id]
       total_revenue(params)
     when "revenue"
@@ -35,14 +32,18 @@ class MerchantIntelligence
   end
 
   def top_revenue_by_date(params)
-    Merchant.find(params[:merchant_id]).top_revenue_by_date(params[:date])
+    {"revenue" => '%.2f' % (Merchant.find(params[:merchant_id]).top_revenue_by_date(params[:date]).to_f / 100)}
   end
 
   def total_revenue(params)
-    Merchant.find(params[:merchant_id]).total_revenue
+    if params[:date]
+      top_revenue_by_date(params)
+    else
+      Merchant.find(params[:merchant_id]).total_revenue
+    end
   end
 
   def all_merchants_top_revenue_by_date(params)
-    Transaction.total_revenue_by_date(params[:date])
+    {"total_revenue" => '%.2f' % (Transaction.total_revenue_by_date(params[:date]).to_f / 100)}
   end
 end
