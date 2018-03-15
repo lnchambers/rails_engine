@@ -2,6 +2,7 @@ class Api::V1::Merchants::IntelligenceController < ApplicationController
   before_action :set_intelligence
 
   def index
+    binding.pry
     render json: @merchant_intelligence.route(params)
   end
 

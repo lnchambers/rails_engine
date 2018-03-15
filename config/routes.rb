@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       namespace :merchants do
-        get "most_revenue", :to => "intelligence#index"
+        get "most_revenue", :to => "intelligence#index/most_revenue"
         get "find_all", :to => "merchants#index"
         get "find", :to => "merchants#show"
         get "random", :to => "merchants#show"

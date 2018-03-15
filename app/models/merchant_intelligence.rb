@@ -1,6 +1,7 @@
 class MerchantIntelligence
 
   def route(params)
+    binding.pry
     case params[:action]
     when "show"
       favorite_customer
