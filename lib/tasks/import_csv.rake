@@ -1,5 +1,5 @@
 namespace :import_csv do
-  desc "imports customers.csv"
+  desc "import_customers.csv"
   task create_customers: :environment do
     SmarterCSV.process("data/customers.csv").each do|row|
       Customer.create!(row)
@@ -29,7 +29,7 @@ namespace :import_csv do
 
   desc "import_merchants.csv"
   task create_merchants: :environment do
-      SmarterCSV.process("data/merchants.csv").each do|row|
+    SmarterCSV.process("data/merchants.csv").each do|row|
       Merchant.create!(row)
     end
   end

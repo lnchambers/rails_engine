@@ -1,16 +1,13 @@
 class Search
 
   def route(params, model)
-    case params[:id]
-    when "find"
+    case params[:action]
+    when "show"
       single_search(params, model)
-    when "find_all"
-      binding.pry
+    when "index"
       multiple_search(params, model)
-    when "random"
-      random(model)
     else
-      model.find(params[:id])
+      random(model)
     end
   end
 
@@ -32,7 +29,7 @@ class Search
     elsif params[:unit_price]
       model.find_by("unit_price LIKE ?", params[:unit_price])
     elsif params[:created_at]
-      model.find_by("created_at LIKE ?", params[:created_at])
+      model.find_by(created_at: Time.zone.parse(params[:created_at]))
     elsif params[:status]
       status = params[:status].gsub("-", " ").downcase
       model.find_by("status LIKE ?", status)
@@ -44,8 +41,10 @@ class Search
       model.find_by("credit_card_number LIKE ?", params[:credit_card_number])
     elsif params[:updated_at]
       model.find_by("updated_at LIKE ?", params[:updated_at])
+    elsif params[:id]
+      model.find_by(id: params[:id])
     else
-      model.find(params[:id])
+      random(model)
     end
   end
 
@@ -79,8 +78,10 @@ class Search
       model.where("credit_card_number LIKE ?", params[:credit_card_number])
     elsif params[:updated_at]
       model.where("updated_at LIKE ?", params[:updated_at])
+    elsif params[:id]
+      [model.find(params[:id])]
     else
-      model.find(params[:id])
+      model.all
     end
   end
 

@@ -45,8 +45,8 @@ describe "Invoice Request" do
 
     expect(response).to be_success
     expect(invoice.count).to eq(1)
-    expect(invoice.id).to eq(1)
-    expect(invoice.status).to eq("It's Complicated")
+    expect(invoice[0]["id"]).to eq(1)
+    expect(invoice[0]["status"]).to eq("It's Complicated")
   end
 
   it "can search by status and return all" do
@@ -72,5 +72,17 @@ describe "Invoice Request" do
 
     expect(response).to be_success
     expect(invoice.class).to eq(Hash)
+  end
+
+  it "can return a single invoice based on created_at" do
+    invoice = create(:invoice, created_at: "2012-03-13 16:54:10 UTC")
+    create(:invoice)
+
+    get "/api/v1/invoices/find?created_at=2012-03-13 16:54:10 UTC"
+
+    invoices = JSON.parse(response.body)
+
+    expect(response).to be_success
+    expect(invoices["status"]).to eq(invoice.status)
   end
 end

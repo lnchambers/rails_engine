@@ -3,6 +3,16 @@ Rails.application.routes.draw do
     namespace :v1 do
       namespace :merchants do
         get "most_revenue", :to => "intelligence#index"
+        get "find_all", :to => "merchants#index"
+        get "find", :to => "merchants#show"
+        get "random", :to => "merchants#show"
+      end
+      namespace :invoices do
+        get "find_all", :to => "invoices#index"
+        get "find", :to => "invoices#show"
+        get "random", :to => "invoices#show"
+        get "/", :to => "invoices#index"
+        get "/:id", :to => "invoices#show"
       end
       resources :merchants, only: [:index, :show] do
         get "invoices", :to => "merchants/invoices#index"
