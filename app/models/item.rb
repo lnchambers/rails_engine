@@ -11,14 +11,11 @@ class Item < ApplicationRecord
     .group(:id)
   end
 
-
-  def self.best_day(id)
-    select("items.*, sum(invoice_items.unit_price * invoice_items.quantity) AS sales")
+  def self.most_revenue(limit = 5)
+    select("items.*, sum(invoice_items.unit_price * invoice_items.quantity) as revenue")
     .joins(:invoice_items)
-    .where(id: id)
-    .order("sales DESC")
-    .first
-    .created_at
+    .order("revenue DESC").limit(limit)
+    .group(:id)
   end
 
   def best_day
