@@ -5,6 +5,10 @@ class Api::V1::Merchants::IntelligenceController < ApplicationController
     render json: @merchant_intelligence.route(params)
   end
 
+  def show
+    render json: @merchant_intelligence.route(params)
+  end
+
   private
 
     def set_intelligence

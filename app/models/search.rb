@@ -16,6 +16,7 @@ class Search
   def single_search(params, model)
     if params[:name]
       name = params[:name].gsub("-", " ").downcase
+      binding.pry
       model.find_by("lower(name) LIKE ?", name)
     elsif params[:first_name]
       model.find_by("lower(first_name) LIKE ?", params[:first_name])
