@@ -23,7 +23,6 @@ describe Merchant, type: :model do
 
     describe ".most_revenue" do
       it "returns the top x merchants ranked by revenue" do
-        binding.pry
         expect(Merchant.most_revenue(2)).to eq(@merchants)
         expect(Merchant.most_revenue.first).to eq(5999000)
         expect(Merchant.most_revenue.first).to eq(359940)
