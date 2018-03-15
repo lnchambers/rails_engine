@@ -37,10 +37,14 @@ class Search
       model.find_by("result LIKE ?", params[:result])
     elsif params[:credit_card_number]
       model.find_by("credit_card_number LIKE ?", params[:credit_card_number])
+    elsif params[:item_id]
+      model.find_by("item_id LIKE ?", params[:item_id])
+    elsif params[:invoice_id]
+      model.find_by("invoice_id LIKE ?", params[:invoice_id])
     elsif params[:updated_at]
       model.find_by(updated_at: Time.zone.parse(params[:updated_at]))
     elsif params[:id]
-      model.find_by(id: params[:id])
+      model.find(params[:id])
     else
       random(model)
     end
@@ -51,9 +55,9 @@ class Search
       name = params[:name].gsub("-", " ").downcase
       model.where("lower(name) LIKE ?", name)
     elsif params[:first_name]
-      model.find_by("lower(first_name) LIKE ?", params[:first_name])
+      model.where("lower(first_name) LIKE ?", params[:first_name])
     elsif params[:last_name]
-      model.find_by("lower(last_name) LIKE ?", params[:last_name])
+      model.where("lower(last_name) LIKE ?", params[:last_name])
     elsif params[:merchant_id]
       model.where(merchant_id: params[:merchant_id])
     elsif params[:customer_id]
