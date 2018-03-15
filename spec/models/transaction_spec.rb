@@ -20,7 +20,7 @@ describe Transaction, type: :model do
       create_list(:transaction, 3, invoice: @invoice_2)
     end
 
-    describe "#{}total_revenue_by_date" do
+    describe "#total_revenue_by_date" do
       it "returns the total revenue for date x across all merchants" do
         expect(Transaction.total_revenue_by_date("2018-02-03")).to eq(6358940)
       end
