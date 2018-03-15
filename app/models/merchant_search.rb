@@ -1,15 +1,11 @@
 class MerchantSearch
 
   def route(params)
-    case params[:id]
-    when "find"
+    case params[:action]
+    when "show"
       single_search(params)
-    when "find_all"
+    when "index"
       multiple_search(params)
-    when "random"
-      random
-    else
-      Merchant.find(params[:id])
     end
   end
 
@@ -22,9 +18,13 @@ class MerchantSearch
     elsif params[:unit_price]
       Merchant.find_by("unit_price LIKE ?", params[:unit_price])
     elsif params[:created_at]
-      Merchant.find_by("created_at LIKE ?", params[:created_at])
+      Merchant.find_by(created_at: Time.zone.parse(params[:created_at]))
+    elsif params[:updated_at]
+      Merchant.find_by(updated_at: Time.zone.parse(params[:updated_at]))
+    elsif params[:id]
+      Merchant.find_by(id: params[:id])
     else
-      Merchant.find_by("updated_at LIKE ?", params[:updated_at])
+      random
     end
   end
 
@@ -37,9 +37,13 @@ class MerchantSearch
     elsif params[:unit_price]
       Merchant.where("unit_price LIKE ?", params[:unit_price])
     elsif params[:created_at]
-      Merchant.where("created_at LIKE ?", params[:created_at])
+      Merchant.where(created_at: Time.zone.parse(params[:created_at]))
+    elsif params[:updated_at]
+      Merchant.where(updated_at: Time.zone.parse(params[:updated_at]))
+    elsif params[:id]
+      [Merchant.find(params[:id])]
     else
-      Merchant.where("updated_at LIKE ?", params[:updated_at])
+      Merchant.all
     end
   end
 
