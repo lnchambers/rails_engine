@@ -23,30 +23,31 @@ class Merchant < ApplicationRecord
   end
 
   def self.revenue_by_date(date)
-    select("merchants.*, sum(invoice_items.unit_price * invoice_items.quantity) AS revenue")
-      .joins(:invoice_items, :transactions)
+    start_day = DateTime.parse(date).beginning_of_day
+    end_day  = DateTime.parse(date).end_of_day
+    select("merchants.*, SUM(invoice_items.quantity * invoice_items.unit_price) as revenue")
+      .joins(invoices: [:invoice_items, :transactions])
       .merge(Transaction.unscoped.successful)
-      .where(transactions: {created_at: date})
-      .first
-      .revenue
+      .where(transactions: {updated_at: start_day..end_day})
+      .group(:id)
+      .order("revenue DESC")
   end
 
-  def self.top_revenue(id)
-    select("merchants.*, sum(invoice_items.unit_price * invoice_items.quantity) AS revenue")
-      .joins(:invoice_items, :transactions)
+  def total_revenue
+    invoice_items.joins(invoice: [:transactions])
       .merge(Transaction.unscoped.successful)
-      .where(id: id)
-      .first
-      .revenue
+      .sum("unit_price * quantity")
   end
 
-  def self.top_revenue_by_date(id, date)
-    select("merchants.*, sum(invoice_items.unit_price * invoice_items.quantity) AS revenue")
-      .joins(:invoice_items, :transactions)
-      .merge(Transaction.unscoped.successful)
-      .where(id: id)
-      .where(invoices: {created_at: date})
-      .first
-      .revenue
+
+  def top_revenue_by_date(date)
+    start_day = DateTime.parse(date).beginning_of_day
+    end_day  = DateTime.parse(date).end_of_day
+    invoice_items
+    .joins(invoice: :transactions)
+    .merge(Transaction.unscoped.successful)
+    .where(invoices: {updated_at: start_day..end_day})
+    .sum("unit_price * quantity")
   end
+
 end
