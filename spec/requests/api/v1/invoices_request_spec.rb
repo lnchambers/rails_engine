@@ -36,6 +36,19 @@ describe "Invoice Request" do
     expect(invoice["status"]).to eq("Argwillinillifus Grotcherinkleton")
   end
 
+  it "can search by id and return all" do
+    create_list(:invoice, 2)
+
+    get "/api/v1/invoices/find_all?id=1"
+
+    invoice = JSON.parse(response.body)
+
+    expect(response).to be_success
+    expect(invoice.count).to eq(1)
+    expect(invoice.id).to eq(1)
+    expect(invoice.status).to eq("It's Complicated")
+  end
+
   it "can search by status and return all" do
     create_list(:invoice, 5, status: "Argwillinillifus Grotcherinkleton")
     create_list(:invoice, 5)

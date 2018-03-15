@@ -5,6 +5,7 @@ class Search
     when "find"
       single_search(params, model)
     when "find_all"
+      binding.pry
       multiple_search(params, model)
     when "random"
       random(model)
@@ -16,8 +17,11 @@ class Search
   def single_search(params, model)
     if params[:name]
       name = params[:name].gsub("-", " ").downcase
-      binding.pry
       model.find_by("lower(name) LIKE ?", name)
+    elsif params[:merchant_id]
+      model.find_by(merchant_id: params[:merchant_id])
+    elsif params[:customer_id]
+      model.find_by(customer_id: params[:customer_id])
     elsif params[:first_name]
       model.find_by("lower(first_name) LIKE ?", params[:first_name])
     elsif params[:last_name]
@@ -38,8 +42,10 @@ class Search
       model.find_by("result LIKE ?", params[:result])
     elsif params[:credit_card_number]
       model.find_by("credit_card_number LIKE ?", params[:credit_card_number])
-    else
+    elsif params[:updated_at]
       model.find_by("updated_at LIKE ?", params[:updated_at])
+    else
+      model.find(params[:id])
     end
   end
 
@@ -51,6 +57,10 @@ class Search
       model.find_by("lower(first_name) LIKE ?", params[:first_name])
     elsif params[:last_name]
       model.find_by("lower(last_name) LIKE ?", params[:last_name])
+    elsif params[:merchant_id]
+      model.where(merchant_id: params[:merchant_id])
+    elsif params[:customer_id]
+      model.where(customer_id: params[:customer_id])
     elsif params[:description]
       description = params[:description].gsub("-", " ").downcase
       model.where("lower(description) LIKE ?", description)
@@ -67,8 +77,10 @@ class Search
       model.where("result LIKE ?", params[:result])
     elsif params[:credit_card_number]
       model.where("credit_card_number LIKE ?", params[:credit_card_number])
-    else
+    elsif params[:updated_at]
       model.where("updated_at LIKE ?", params[:updated_at])
+    else
+      model.find(params[:id])
     end
   end
 
