@@ -43,15 +43,21 @@ describe Merchant, type: :model do
     before(:each) do
       @merchants = create_list(:merchant, 2)
       @customer = create(:customer)
+      @customer_two = create(:customer)
+      @customer_three = create(:customer)
       item = create(:item, name: "Best Seller",unit_price: 2, merchant: @merchants[0])
       item_2 = create(:item, name: "Worst Seller", unit_price: 20, merchant: @merchants[1])
       @invoice = create(:invoice, merchant: @merchants[0], customer: @customer, updated_at: "2018-02-03")
       @invoice_2 = create(:invoice, merchant: @merchants[1], customer: @customer, updated_at: "2018-02-04")
+      @invoice_3 = create(:invoice, merchant: @merchants[0], customer: @customer_two, updated_at: "2018-02-04")
+      @invoice_4 = create(:invoice, merchant: @merchants[0], customer: @customer_three, updated_at: "2018-02-04")
 
       create_list(:invoice_item, 10, item: item, invoice: @invoice)
       create_list(:invoice_item, 2, item: item_2, invoice: @invoice_2)
       create_list(:transaction, 10, invoice: @invoice)
       create_list(:transaction, 3, invoice: @invoice_2)
+      create_list(:transaction, 3, invoice: @invoice_3, result: "failed")
+      create_list(:transaction, 9, invoice: @invoice_4, result: "failed")
     end
 
     describe "#total revenue" do
@@ -72,6 +78,12 @@ describe Merchant, type: :model do
       it "returns the customer who has conducted the most total number of successful transactions" do
         expect(Merchant.first.favorite_customer).to eq(@customer)
         expect(Merchant.last.favorite_customer).to eq(@customer)
+      end
+    end
+
+    describe "#customers_with_pending_invoices" do
+      it "returns a collection of customers which have pending (unpaid) invoices" do
+        expect(Merchant.first.customers_with_pending_invoices).to eq([@customer_two, @customer_three])
       end
     end
   end
