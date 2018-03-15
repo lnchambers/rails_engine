@@ -30,4 +30,23 @@ class Merchant < ApplicationRecord
       .first
       .revenue
   end
+
+  def self.top_revenue(id)
+    select("merchants.*, sum(invoice_items.unit_price * invoice_items.quantity) AS revenue")
+      .joins(:invoice_items, :transactions)
+      .merge(Transaction.unscoped.successful)
+      .where(id: id)
+      .first
+      .revenue
+  end
+
+  def self.top_revenue_by_date(id, date)
+    select("merchants.*, sum(invoice_items.unit_price * invoice_items.quantity) AS revenue")
+      .joins(:invoice_items, :transactions)
+      .merge(Transaction.unscoped.successful)
+      .where(id: id)
+      .where(invoices: {created_at: date})
+      .first
+      .revenue
+  end
 end
