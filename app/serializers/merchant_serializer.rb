@@ -1,3 +1,5 @@
 class MerchantSerializer < ActiveModel::Serializer
-  attributes :id, :name
+  attributes :id, :name, :total_revenue
+
+
 end

@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       namespace :merchants do
-        get "most_revenue", :to => "intelligence#index/most_revenue"
+        get "most_revenue", :to => "intelligence#index"
+        get "most_items", :to => "intelligence#index"
+        get "revenue", :to => "intelligence#index"
         get "find_all", :to => "merchants#index"
         get "find", :to => "merchants#show"
         get "random", :to => "merchants#show"
@@ -24,6 +26,8 @@ Rails.application.routes.draw do
         get "/:id", :to => "customers#show"
       end
       namespace :items do
+        get "most_revenue", :to => "intelligence#index"
+        get "most_items", :to => "intelligence#index"
         get "find_all", :to => "items#index"
         get "find", :to => "items#show"
         get "random", :to => "items#show"
@@ -48,10 +52,12 @@ Rails.application.routes.draw do
         get "invoices", :to => "merchants/invoices#index"
         get "items", :to => "merchants/items#index"
         get "favorite_customer", :to => "merchants/intelligence#show"
+        get "revenue", :to => "merchants/intelligence#show"
       end
       resources :customers, only: [] do
         get "transactions", :to => "customers/transactions#index"
         get "invoices", :to => "customers/invoices#index"
+        get "favorite_merchant", :to => "customers/intelligence#show"
       end
       resources :transactions, only: [] do
         get "invoice", :to => "transactions/invoices#show"
@@ -59,6 +65,7 @@ Rails.application.routes.draw do
       resources :items, only: [] do
         get "invoice_items", :to => "items/invoice_items#index"
         get "merchant", :to => "items/merchants#show"
+        get "best_day", :to => "items/intelligence#show"
       end
       resources :invoice_items, only: [] do
         get "invoice", :to => "invoice_items/invoices#show"
