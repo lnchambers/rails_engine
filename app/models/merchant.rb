@@ -5,6 +5,7 @@ class Merchant < ApplicationRecord
   has_many :customers, through: :invoices
   has_many :invoice_items, through: :invoices
   has_many :transactions, through: :invoices
+  has_many :customers, through: :invoices
 
   def self.most_revenue(limit = 5)
     select("merchants.*, sum(invoice_items.unit_price * invoice_items.quantity) AS revenue")
@@ -40,5 +41,12 @@ class Merchant < ApplicationRecord
       .sum("unit_price * quantity")
   end
 
-
+  def favorite_customer
+    customers
+      .select("customers.*, COUNT(transactions.id) as transaction_count")
+      .joins(invoices: [:transactions])
+      .merge(Transaction.unscoped.successful)
+      .group(:id)
+      .order("transaction_count DESC").first
+  end
 end
