@@ -76,6 +76,10 @@ class Search
       model.where("credit_card_number LIKE ?", params[:credit_card_number])
     elsif params[:updated_at]
       model.where(updated_at: Time.zone.parse(params[:updated_at]))
+    elsif params[:item_id]
+      model.where(item_id: params[:item_id])
+    elsif params[:invoice_id]
+      model.where(invoice_id: params[:invoice_id])
     elsif params[:id]
       [model.find(params[:id])]
     else
