@@ -1,4 +1,4 @@
-#How to Create A Rake CSV Importer
+# How to Create A Rake CSV Importer
 ```
 rails g task import_csv create_customers create_invoice_items create_invoices create_items create_merchants create_transactions
 ```
