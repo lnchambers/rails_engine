@@ -44,7 +44,7 @@ bundle
 ```
 rails db:create
 rails db:migrate
-rake import_csv:import_all
+rake import_csv
 ```
 * To import a specific csv for a model, see this [explanation](https://github.com/lnchambers/rails_engine/blob/master/csv_import.md)
 
