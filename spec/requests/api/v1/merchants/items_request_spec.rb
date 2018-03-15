@@ -15,6 +15,6 @@ describe "Merchants Items request" do
     expect(items.count).to eq(5)
     expect(items[0]["name"]).to eq(item.name)
     expect(items[0]["description"]).to eq(item.description)
-    expect(items[0]["unit_price"]).to eq(item.unit_price)
+    expect(items[0]["unit_price"]).to eq("49.99")
   end
 end

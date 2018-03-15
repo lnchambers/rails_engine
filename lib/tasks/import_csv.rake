@@ -1,48 +1,42 @@
 namespace :import_csv do
-  desc "imports customers.csv"
+  desc "import_customers.csv"
   task create_customers: :environment do
-    data = SmarterCSV.process("data/customers.csv")
-    data.each do |row|
+    SmarterCSV.process("data/customers.csv").each do|row|
       Customer.create!(row)
     end
   end
 
   desc "import_invoice_items.csv"
   task create_invoice_items: :environment do
-    data = SmarterCSV.process("data/invoice_items.csv")
-    data.each do |row|
+    SmarterCSV.process("data/invoice_items.csv").each do|row|
       InvoiceItem.create!(row)
     end
   end
 
   desc "import_invoices.csv"
   task create_invoices: :environment do
-    data = SmarterCSV.process("data/invoices.csv")
-    data.each do |row|
+    SmarterCSV.process("data/invoices.csv").each do |row|
       Invoice.create!(row)
     end
   end
 
   desc "import_items.csv"
   task create_items: :environment do
-    data = SmarterCSV.process("data/items.csv")
-    data.each do |row|
+    SmarterCSV.process("data/items.csv").each do|row|
       Item.create!(row)
     end
   end
 
   desc "import_merchants.csv"
   task create_merchants: :environment do
-    data = SmarterCSV.process("data/merchants.csv")
-    data.each do |row|
+    SmarterCSV.process("data/merchants.csv").each do|row|
       Merchant.create!(row)
     end
   end
 
   desc "import_transactions.csv"
   task create_transactions: :environment do
-    data = SmarterCSV.process("data/transactions.csv")
-    data.each do |row|
+    SmarterCSV.process("data/transactions.csv").each do|row|
       Transaction.create!(row)
     end
   end

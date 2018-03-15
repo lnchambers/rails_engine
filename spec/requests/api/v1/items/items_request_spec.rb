@@ -12,7 +12,7 @@ describe "Items Request" do
     expect(items.count).to eq(10)
     expect(items[0]["name"]).to eq("Opakawagalaga Eupanifahorious")
     expect(items[0]["description"]).to eq("Humphry Davenport The Second; Esquire, Duke of Portsholdshirelington")
-    expect(items[0]["unit_price"]).to eq(4999)
+    expect(items[0]["unit_price"]).to eq("49.99")
   end
 
   it "can show you a single item" do
@@ -25,7 +25,7 @@ describe "Items Request" do
     expect(response).to be_success
     expect(item["name"]).to eq("Opakawagalaga Eupanifahorious")
     expect(item["description"]).to eq("Humphry Davenport The Second; Esquire, Duke of Portsholdshirelington")
-    expect(item["unit_price"]).to eq(4999)
+    expect(item["unit_price"]).to eq("49.99")
     expect(item[1]).to eq(nil)
   end
 
@@ -40,7 +40,7 @@ describe "Items Request" do
     expect(response).to have_http_status(200)
     expect(item["name"]).to eq("Richard Dunfordshirelingtonhill")
     expect(item["description"]).to eq("Argwillinillifus Grotcherinkleton")
-    expect(item["unit_price"]).to eq(7999)
+    expect(item["unit_price"]).to eq("79.99")
   end
 
   it "can search by description and return one" do
@@ -54,7 +54,7 @@ describe "Items Request" do
     expect(response).to have_http_status(200)
     expect(item["name"]).to eq("Richard Dunfordshirelingtonhill")
     expect(item["description"]).to eq("Argwillinillifus Grotcherinkleton")
-    expect(item["unit_price"]).to eq(7999)
+    expect(item["unit_price"]).to eq("79.99")
   end
 
   it "can search by unit_price and return one" do
@@ -68,7 +68,7 @@ describe "Items Request" do
     expect(response).to have_http_status(200)
     expect(item["name"]).to eq("Richard Dunfordshirelingtonhill")
     expect(item["description"]).to eq("Argwillinillifus Grotcherinkleton")
-    expect(item["unit_price"]).to eq(7999)
+    expect(item["unit_price"]).to eq("79.99")
   end
 
   it "can search by name and return all" do
@@ -83,7 +83,7 @@ describe "Items Request" do
     expect(item.count).to eq(5)
     expect(item[1]["name"]).to eq("Richard Dunfordshirelingtonhill")
     expect(item[1]["description"]).to eq("Argwillinillifus Grotcherinkleton")
-    expect(item[1]["unit_price"]).to eq(7999)
+    expect(item[1]["unit_price"]).to eq("79.99")
   end
 
   it "can find a random record" do
