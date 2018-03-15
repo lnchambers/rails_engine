@@ -25,7 +25,7 @@ class Search
       description = params[:description].gsub("-", " ").downcase
       model.find_by("lower(description) LIKE ?", description)
     elsif params[:unit_price]
-      model.find_by("unit_price LIKE ?", params[:unit_price])
+      model.find_by("unit_price LIKE ?", price_search_format(params))
     elsif params[:created_at]
       model.find_by(created_at: Time.zone.parse(params[:created_at]))
     elsif params[:status]
@@ -62,7 +62,7 @@ class Search
       description = params[:description].gsub("-", " ").downcase
       model.where("lower(description) LIKE ?", description)
     elsif params[:unit_price]
-      model.where("unit_price LIKE ?", params[:unit_price])
+      model.where("unit_price LIKE ?", price_search_format(params))
     elsif params[:created_at]
       model.where(created_at: Time.zone.parse(params[:created_at]))
     elsif params[:status]
@@ -85,6 +85,10 @@ class Search
 
   def random(model)
     model.all.sample
+  end
+
+  def price_search_format(params)
+    params[:unit_price].gsub(".", "").to_i
   end
 
 end
