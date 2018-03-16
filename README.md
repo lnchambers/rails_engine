@@ -54,6 +54,11 @@ rake import_csv
 
 ```
 rails c
+```
+
+After the console is open:
+
+```
 Items.most_items
 Items.most_revenue
 Transaction.total_revenue_by_date("2012-03-16")
@@ -79,7 +84,7 @@ rspec spec/models/invoice_spec.rb
 ```
 
 * Complex Model Test:
-The following test makes use ten separate [factorybot](https://github.com/thoughtbot/factory_bot)] factories to ensure that a merchant has a name and that it has all the appropriate associations(e.g., has many invoices_items through invoices). The class method ```.most_revenue``` selects the top merchants ranked by revenue. The class method ```.most_items``` selects the top merchants ranked by total number of items sold. The instance method ```#top_revenue_by_date```selects the total revenue for a specific merchant on an invoice date.
+The following test makes use ten separate [factorybot](https://github.com/thoughtbot/factory_bot) factories to ensure that a merchant has a name and that it has all the appropriate associations(e.g., has many invoices_items through invoices). The class method ```.most_revenue``` selects the top merchants ranked by revenue. The class method ```.most_items``` selects the top merchants ranked by total number of items sold. The instance method ```#top_revenue_by_date```selects the total revenue for a specific merchant on an invoice date.
 
 ```
 rspec spec/models/merchant_spec.rb
@@ -116,7 +121,7 @@ Please feel free to submit pull requests and suggestions to this repository. We 
 
 ## Authors
 
-* [Luke Chambers](ttps://github.com/lnchambers)
+* [Luke Chambers](https://github.com/lnchambers)
 * [Matt Milton](https://github.com/mgmilton)
 
 
