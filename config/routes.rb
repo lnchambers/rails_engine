@@ -52,7 +52,8 @@ Rails.application.routes.draw do
         get "invoices", :to => "merchants/invoices#index"
         get "items", :to => "merchants/items#index"
         get "favorite_customer", :to => "merchants/intelligence#show"
-        get "revenue", :to => "merchants/intelligence#show"
+        get "revenue", :to => "transactions/intelligence#show"
+        get "customers_with_pending_invoices", :to => "merchants/intelligence#show"
       end
       resources :customers, only: [] do
         get "transactions", :to => "customers/transactions#index"

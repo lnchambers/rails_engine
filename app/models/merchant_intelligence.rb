@@ -6,12 +6,12 @@ class MerchantIntelligence
       favorite_customer(params)
     when "most_revenue"
       most_revenue(params)
-    when "revenue" && params[:merchant_id]
-      total_revenue(params)
     when "revenue"
       all_merchants_top_revenue_by_date(params)
     when "most_items"
       most_items(params)
+    when "customers_with_pending_invoices"
+      customers_with_pending_invoices(params)
     end
   end
 
@@ -31,19 +31,11 @@ class MerchantIntelligence
     Merchant.most_items(params[:quantity])
   end
 
-  def top_revenue_by_date(params)
-    {"revenue" => '%.2f' % (Merchant.find(params[:merchant_id]).top_revenue_by_date(params[:date]).to_f / 100)}
-  end
-
-  def total_revenue(params)
-    if params[:date]
-      top_revenue_by_date(params)
-    else
-      Merchant.find(params[:merchant_id]).total_revenue
-    end
-  end
-
   def all_merchants_top_revenue_by_date(params)
     {"total_revenue" => '%.2f' % (Transaction.total_revenue_by_date(params[:date]).to_f / 100)}
+  end
+
+  def customers_with_pending_invoices(params)
+    Merchant.find(params[:merchant_id]).customers_with_pending_invoices
   end
 end
