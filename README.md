@@ -1,6 +1,6 @@
 # Rails Engine
 
-This project utilizes Ruby on Rails and ActiveRecord to build a JSON API which exposes sales data selected from Etsy. This api serves up business analytics, relational endpoints, and record endpoints. For a full explanation of the endpoints, look at this [endpoint explanation](https://github.com/lnchambers/rails_engine/blob/master/endpoint.md). Below is a database schema explaining the relationships between each endpoint: merchant, customer, items, invoices, transactions and invoice items. 
+This project utilizes Ruby on Rails and ActiveRecord to build a JSON API which exposes sales data selected from Etsy. This api serves up business analytics, relational endpoints, and record endpoints. For a full explanation of the endpoints, look at this [endpoint explanation](https://github.com/lnchambers/rails_engine/blob/master/endpoint_explanations.md). Below is a database schema explaining the relationships between each endpoint: merchant, customer, items, invoices, transactions and invoice items. 
 
 ![schema](https://i.imgur.com/gzoHyeR.png)
 
