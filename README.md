@@ -1,6 +1,6 @@
 # Rails Engine
 
-This project utilizes Ruby on Rails and ActiveRecord to build a JSON API which exposes sales data selected from Etsy.
+This project utilizes Ruby on Rails and ActiveRecord to build a JSON API which exposes sales data selected from Etsy. This api serves up business analytics, relational endpoints, and record endpoints. For a full explanation of the endpoints, look at this [endpoint explanation](https://github.com/lnchambers/rails_engine/blob/master/endpoint.md). Below is a database schema explaining the relationships between each endpoint: merchant, customer, items, invoices, transactions and invoice items. 
 
 ![schema](https://i.imgur.com/gzoHyeR.png)
 
@@ -28,10 +28,8 @@ These instructions will get you a copy of the rails engine API up and running on
 * Rails, version 5.1.5
 * Puma, version 3.7
 * Rspec-Rails
-* Active Model Serializers, version 0.10.0
-* Smarter CSV
 
-* Add these system dependencies to your gem file then run
+After cloning down this repository, change into the directory ```rales_engine``` and run:
 
 ```
 bundle
@@ -39,18 +37,18 @@ bundle
 
 ## Installing
 
-* To configure the database run the following commands.
+To setup the database necessary for this API, run the following commands:
 
 ```
 rails db:create
 rails db:migrate
 rake import_csv
 ```
-* To import a specific csv for a model, see this [explanation](https://github.com/lnchambers/rails_engine/blob/master/csv_import.md)
+To import a specific csv for a model, see this [explanation](https://github.com/lnchambers/rails_engine/blob/master/csv_import.md).
 
 ## Complex Queries
 
-* To view some complex data querying run the following:
+To view some complex data querying run the following:
 
 ```
 rails c
@@ -68,6 +66,7 @@ Merchant.first.customers_with_pending_invoices
 
 
 ## Running the tests
+
 In order to run the test suite, run the following command:
 ```
 rspec
@@ -84,6 +83,7 @@ rspec spec/models/invoice_spec.rb
 ```
 
 * Complex Model Test:
+
 The following test makes use ten separate [factorybot](https://github.com/thoughtbot/factory_bot) factories to ensure that a merchant has a name and that it has all the appropriate associations(e.g., has many invoices_items through invoices). The class method ```.most_revenue``` selects the top merchants ranked by revenue. The class method ```.most_items``` selects the top merchants ranked by total number of items sold. The instance method ```#top_revenue_by_date```selects the total revenue for a specific merchant on an invoice date.
 
 ```
@@ -100,6 +100,7 @@ rspec spec/requests/api/v1/customers/invoices_request_spec.rb
 
 
 * Complex Request Test:
+
 When a request goes to the invoice_items record endpoint, a user can find an invoice item by id, unit_price, quantity or all invoice items matching a unit price or quantity.
 
 ```
