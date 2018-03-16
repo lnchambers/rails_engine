@@ -24,6 +24,6 @@ class ItemIntelligence
   end
 
   def best_day(params)
-    Item.find(params[:item_id]).best_day
+    {"best_day" => Item.find(params[:item_id]).best_day.first.created_at}
   end
 end
